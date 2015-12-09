@@ -31,10 +31,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
-import android.net.Uri;
-import android.os.Handler;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.util.TypedValue;
@@ -529,8 +525,8 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             startBatteryActivity();
         } else if (v == mAlarmStatus && mNextAlarm != null) {
             PendingIntent showIntent = mNextAlarm.getShowIntent();
-            if (showIntent != null && showIntent.isActivity()) {
-                mActivityStarter.startActivity(showIntent.getIntent(), true /* dismissShade */);
+            if (showIntent != null) {
+                mActivityStarter.startPendingIntentDismissingKeyguard(showIntent);
             }
         }
     }
